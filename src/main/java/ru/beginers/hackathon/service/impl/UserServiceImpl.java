@@ -1,7 +1,10 @@
 package ru.beginers.hackathon.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import ru.beginers.hackathon.model.User;
 import ru.beginers.hackathon.repository.UserRepository;
 import ru.beginers.hackathon.service.UserService;
@@ -9,41 +12,53 @@ import ru.beginers.hackathon.util.exception.NotFoundException;
 
 import java.util.List;
 
+import static ru.beginers.hackathon.util.ValidationUtil.checkNotFound;
+import static ru.beginers.hackathon.util.ValidationUtil.checkNotFoundWithId;
+
 @Service
 public class UserServiceImpl implements UserService {
-
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository repository;
 
+    @CacheEvict(value = "users", allEntries = true)
     @Override
     public User create(User user) {
-        userRepository.save(user);
-        return userRepository.findById(user.getId()).orElse(new User());
+        Assert.notNull(user, "user must not be null");
+        return repository.save(user);
     }
 
+    @CacheEvict(value = "users", allEntries = true)
     @Override
     public void delete(int id) throws NotFoundException {
-        userRepository.deleteById(id);
+        checkNotFoundWithId(repository.delete(id), id);
     }
 
     @Override
     public User get(int id) throws NotFoundException {
-        return userRepository.findById(id).orElse(new User());
+        return checkNotFoundWithId(repository.get(id), id);
     }
 
     @Override
     public User getByLogin(String login) throws NotFoundException {
-        return userRepository.findByLogin(login);
+        Assert.notNull(login, "login must not be null");
+        return checkNotFound(repository.getByLogin(login), "login=" + login);
     }
 
-    @Override
-    public void update(User user) {
-
-    }
-
+    @Cacheable("users")
     @Override
     public List<User> getAll() {
-        return null;
+        return repository.getAll();
     }
 
+    @CacheEvict(value = "users", allEntries = true)
+    @Override
+    public void update(User user) {
+        Assert.notNull(user, "user must not be null");
+        checkNotFoundWithId(repository.save(user), user.getId());
+    }
+
+    @Override
+    public User getWithTickets(int id) {
+        return checkNotFoundWithId(repository.getWithTickets(id), id);
+    }
 }
