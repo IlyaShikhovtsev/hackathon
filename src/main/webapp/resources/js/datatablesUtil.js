@@ -11,6 +11,7 @@ function makeEditable() {
 }
 
 function add() {
+    $("#modalTitle").html(i18n["addTitle"]);
     form.find(":input").val("");
     $("#editRow").modal();
 }
@@ -39,6 +40,7 @@ function save() {
             $("#editRow").modal("hide");
             updateTable();
             successNoty("Saved");
+            successNoty("common.saved");
         }
     });
 }
@@ -52,10 +54,10 @@ function closeNoty() {
     }
 }
 
-function successNoty(text) {
+function successNoty(key) {
     closeNoty();
     new Noty({
-        text: "<span class='glyphicon glyphicon-ok'></span> &nbsp;" + text,
+        text: "<span class='glyphicon glyphicon-ok'></span> &nbsp;" + i18n[key],
         type: 'success',
         layout: "bottomRight",
         timeout: 1000
@@ -65,7 +67,7 @@ function successNoty(text) {
 function failNoty(jqXHR) {
     closeNoty();
     failedNote = new Noty({
-        text: "<span class='glyphicon glyphicon-exclamation-sign'></span> &nbsp;Error status: " + jqXHR.status,
+        text: "<span class='glyphicon glyphicon-exclamation-sign'></span> &nbsp;" + i18n["common.errorStatus"] + ": " + jqXHR.status,
         type: "error",
         layout: "bottomRight"
     }).show();

@@ -7,6 +7,10 @@ function updateTable() {
 
 $(function () {
     datatableApi = $("#datatable").DataTable({
+        "ajax": {
+            "url": ajaxUrl,
+            "dataSrc": ""
+        },
         "paging": false,
         "info": true,
         "columns": [
@@ -14,24 +18,13 @@ $(function () {
                 "data": "name"
             },
             {
-                "data": "login"
+                "data": "login",
             },
             {
-                "data": "roles"
+                "data": "password"
             },
             {
-                "data": "enabled"
-            },
-            {
-                "data": "registered"
-            },
-            {
-                "defaultContent": "Edit",
-                "orderable": false
-            },
-            {
-                "defaultContent": "Delete",
-                "orderable": false
+                "data": "login",
             }
         ],
         "order": [
@@ -39,7 +32,7 @@ $(function () {
                 0,
                 "asc"
             ]
-        ]
+        ],
+        "initComplete": makeEditable
     });
-    makeEditable();
 });
