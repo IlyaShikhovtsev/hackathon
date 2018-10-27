@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>hackathon</groupId>
+    <groupId>ru.beginers</groupId>
     <artifactId>hackathon</artifactId>
     <packaging>war</packaging>
 
@@ -86,8 +86,8 @@
                     </configuration>
                     <deployables>
                         <deployable>
-                            <groupId>ru.javawebinar</groupId>
-                            <artifactId>topjava</artifactId>
+                            <groupId>ru.beginers</groupId>
+                            <artifactId>hackathon</artifactId>
                             <type>war</type>
                             <properties>
                                 <context>${project.build.finalName}</context>
