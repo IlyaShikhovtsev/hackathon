@@ -37,7 +37,9 @@
                         <%--TODO fix rows--%>
                         <%--<td>${user.roles}</td>--%>
                     <td><a><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
-                    <td><a class="delete" id="${user.id}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
+                    <td><a onclick="deleteRow(${user.id})">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </a></td>
                 </tr>
             </c:forEach>
         </table>
@@ -64,7 +66,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="email" class="control-label col-xs-3"><spring:message code="user.email"/></label>
+                        <label for="email" class="control-label col-xs-3"><spring:message code="user.login"/></label>
 
                         <div class="col-xs-9">
                             <input type="email" class="form-control" id="email" name="email" placeholder="<spring:message code="user.email"/>">
@@ -81,8 +83,8 @@
 
                     <div class="form-group">
                         <div class="col-xs-offset-3 col-xs-9">
-                            <button type="submit" class="btn btn-primary">
-                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                            <button type="button" onclick="save()" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                             </button>
                         </div>
                     </div>

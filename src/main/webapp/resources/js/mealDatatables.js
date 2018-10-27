@@ -1,8 +1,13 @@
-var ajaxUrl = "ajax/admin/users/";
+var ajaxUrl = "ajax/profile/meals/";
 var datatableApi;
 
 function updateTable() {
-    $.get(ajaxUrl, updateTableByData);
+    $.ajax({
+        type: "POST",
+        url: ajaxUrl + "filter",
+        data: $("#filter").serialize(),
+        success: updateTableByData
+    });
 }
 
 $(function () {
@@ -11,19 +16,13 @@ $(function () {
         "info": true,
         "columns": [
             {
-                "data": "name"
+                "data": "dateTime"
             },
             {
-                "data": "email"
+                "data": "description"
             },
             {
-                "data": "roles"
-            },
-            {
-                "data": "enabled"
-            },
-            {
-                "data": "registered"
+                "data": "calories"
             },
             {
                 "defaultContent": "Edit",
@@ -37,7 +36,7 @@ $(function () {
         "order": [
             [
                 0,
-                "asc"
+                "desc"
             ]
         ]
     });

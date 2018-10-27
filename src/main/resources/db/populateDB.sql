@@ -18,7 +18,7 @@ INSERT INTO sites (domain_name, user_id, role_id) VALUES
   ('github.com',null,100001),
   ('google.com',null,100000),
   ('google.com',null,100001),
-  ('youtube.com',100003,100000);
+  ('youtube.com',null,100000);
 
 
 INSERT INTO tickets (user_id, date_time, description, site_id) VALUES

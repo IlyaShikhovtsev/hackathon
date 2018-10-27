@@ -32,7 +32,7 @@ CREATE TABLE sites
   role_id     INTEGER,
   FOREIGN KEY (user_id) REFERENCES users (id),
   FOREIGN KEY (role_id) REFERENCES user_roles (id)
-)
+);
 
 CREATE TABLE tickets
 (
