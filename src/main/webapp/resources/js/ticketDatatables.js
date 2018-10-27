@@ -1,4 +1,4 @@
-var ajaxUrl = "ajax/profile/meals/";
+var ajaxUrl = "ajax/profile/ticket/";
 var datatableApi;
 
 function updateTable() {
@@ -22,15 +22,7 @@ $(function () {
                 "data": "description"
             },
             {
-                "data": "calories"
-            },
-            {
-                "defaultContent": "Edit",
-                "orderable": false
-            },
-            {
-                "defaultContent": "Delete",
-                "orderable": false
+                "data": "site"
             }
         ],
         "order": [

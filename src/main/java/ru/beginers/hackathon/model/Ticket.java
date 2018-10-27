@@ -19,10 +19,9 @@ public class Ticket extends AbstractBaseEntity {
     @NotNull
     private User user;
 
-    @NotBlank
-    @Size(max = 100)
-    @Column(name = "site_id")
-    private Integer siteId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="site_id", unique = true, nullable = false)
+    private Site site;
 
     @NotBlank
     @Size(max = 100)
@@ -43,13 +42,11 @@ public class Ticket extends AbstractBaseEntity {
     }
 
     public Ticket(Integer siteId, String description) {
-        this.siteId = siteId;
         this.description = description;
     }
 
-    public Ticket(User user, Integer siteId, String description, LocalDateTime dateTime, boolean status) {
+    public Ticket(User user, String description, LocalDateTime dateTime, boolean status) {
         this.user = user;
-        this.siteId = siteId;
         this.description = description;
         this.dateTime = dateTime;
         this.state = status;
@@ -59,8 +56,20 @@ public class Ticket extends AbstractBaseEntity {
         this.user = user;
     }
 
-    public void setSiteId(Integer siteId) {
-        this.siteId = siteId;
+    public Site getSite() {
+        return site;
+    }
+
+    public void setSite(Site site) {
+        this.site = site;
+    }
+
+    public boolean isState() {
+        return state;
+    }
+
+    public void setState(boolean state) {
+        this.state = state;
     }
 
     public void setDescription(String description) {
@@ -77,10 +86,6 @@ public class Ticket extends AbstractBaseEntity {
 
     public User getUser() {
         return user;
-    }
-
-    public Integer getSiteId() {
-        return siteId;
     }
 
     public String getDescription() {

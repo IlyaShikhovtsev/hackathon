@@ -6,7 +6,7 @@
 <jsp:include page="fragments/headTag.jsp"/>
 <body>
 <script type="text/javascript" src="resources/js/datatablesUtil.js" defer></script>
-<script type="text/javascript" src="resources/js/mealDatatables.js" defer></script>
+<script type="text/javascript" src="resources/js/ticketDatatables.js" defer></script>
 <jsp:include page="fragments/bodyHeader.jsp"/>
 
 <div class="jumbotron">
@@ -22,8 +22,6 @@
                 <th><spring:message code="ticket.dateTime"/></th>
                 <th><spring:message code="ticket.description"/></th>
                 <th><spring:message code="site.title"/></th>
-                <th></th>
-                <th></th>
             </tr>
             </thead>
             <c:forEach items="${tickets}" var="ticket">
@@ -31,11 +29,7 @@
                 <tr>
                     <td>${fn:formatDateTime(ticket.dateTime)}</td>
                     <td>${ticket.description}</td>
-                    <td>${ticket.site}</td>
-                    <td><a><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
-                    <td><a onclick="deleteRow(${ticket.id})">
-                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                    </a></td>
+                    <td>${ticket.site.domainName}</td>
                 </tr>
             </c:forEach>
         </table>
