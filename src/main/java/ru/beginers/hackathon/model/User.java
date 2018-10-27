@@ -1,8 +1,12 @@
 package ru.beginers.hackathon.model;
 
+import org.springframework.util.CollectionUtils;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 
@@ -20,9 +24,11 @@ public class User extends AbstractNamedEntity {
     @Column(name = "password")
     private String password;
 
-    @NotBlank
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")
-    private Set<Role> role;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Set<Role> roles;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<Ticket> tickets;
@@ -30,18 +36,18 @@ public class User extends AbstractNamedEntity {
     public User() {
     }
 
-    public User(String login, String password, Set<Role> role, List<Ticket> tickets) {
+    public User(String login, String password, Set<Role> roles, List<Ticket> tickets) {
         this.login = login;
         this.password = password;
-        this.role = role;
+        this.roles = roles;
         this.tickets = tickets;
     }
 
-    public User(Integer id, String name, String login, String password, Set<Role> role, List<Ticket> tickets) {
+    public User(Integer id, String name, String login, String password, Set<Role> roles, List<Ticket> tickets) {
         super(id, name);
         this.login = login;
         this.password = password;
-        this.role = role;
+        this.roles = roles;
         this.tickets = tickets;
     }
 
@@ -61,12 +67,12 @@ public class User extends AbstractNamedEntity {
         this.password = password;
     }
 
-    public Set<Role> getRole() {
-        return role;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setRole(Set<Role> role) {
-        this.role = role;
+    public void setRoles(Set<Role> roles) {
+        this.roles = CollectionUtils.isEmpty(roles) ? Collections.emptySet() : EnumSet.copyOf(roles);;
     }
 
     public List<Ticket> getTickets() {

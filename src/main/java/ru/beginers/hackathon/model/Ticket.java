@@ -1,9 +1,11 @@
 package ru.beginers.hackathon.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -12,9 +14,10 @@ import java.time.LocalDateTime;
 @Table(name = "tickets")
 public class Ticket extends AbstractBaseEntity {
 
-    @NotBlank
-    @Size(max = 100)
-    @Column(name = "user")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @NotNull
     private User user;
 
     @NotBlank
@@ -38,6 +41,11 @@ public class Ticket extends AbstractBaseEntity {
     private boolean state;
 
     public Ticket() {
+    }
+
+    public Ticket(String site, String description) {
+        this.site = site;
+        this.description = description;
     }
 
     public Ticket(User user, String site, String description, LocalDateTime dateTime, boolean status) {

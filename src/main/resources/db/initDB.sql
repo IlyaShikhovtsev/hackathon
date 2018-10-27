@@ -10,15 +10,14 @@ CREATE TABLE users
   id               INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
   login TEXT NOT NULL,
   name TEXT NOT NULL,
-  password TEXT NOT NULL,
-  role TEXT NOT NULL
+  password TEXT NOT NULL
 );
 
 CREATE TABLE user_roles
 (
   user_id INTEGER NOT NULL,
-  role    VARCHAR,
-  CONSTRAINT user_roles_idx UNIQUE (user_id, role),
+  roles    VARCHAR,
+  CONSTRAINT user_roles_idx UNIQUE (user_id, roles),
   FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
 
