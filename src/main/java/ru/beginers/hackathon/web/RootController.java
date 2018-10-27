@@ -1,20 +1,10 @@
 package ru.beginers.hackathon.web;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import ru.beginers.hackathon.AuthorizedUser;
-import ru.beginers.hackathon.service.TicketService;
-import ru.beginers.hackathon.service.UserService;
 
 @Controller
 public class RootController {
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private TicketService ticketService;
 
     @GetMapping("/")
     public String root() {
@@ -22,8 +12,7 @@ public class RootController {
     }
 
     @GetMapping("/users")
-    public String users(Model model) {
-        model.addAttribute("users", userService.getAll());
+    public String users() {
         return "users";
     }
 
@@ -33,9 +22,7 @@ public class RootController {
     }
 
     @GetMapping("/tickets")
-    public String tickets(Model model) {
-        model.addAttribute("tickets",
-                ticketService.getAll(AuthorizedUser.id()));
+    public String meals() {
         return "tickets";
     }
 }

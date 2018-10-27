@@ -1,9 +1,14 @@
 package ru.beginers.hackathon.web.ticket;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.beginers.hackathon.model.Ticket;
+import ru.beginers.hackathon.util.ValidationUtil;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -23,12 +28,15 @@ public class TicketAjaxController extends AbstractTicketController {
     }
 
     @PostMapping
-    public void createOrUpdate(@RequestParam("id") Integer id,
-                               @RequestParam("description") String description,
-                               @RequestParam("site") String site) {
-        Ticket ticket = new Ticket();
+    public ResponseEntity<String> createOrUpdate(@Valid Ticket ticket, BindingResult result) {
+        if (result.hasErrors()) {
+            return ValidationUtil.getErrorResponse(result);
+        }
         if (ticket.isNew()) {
             super.create(ticket);
+        } else {
+            super.update(ticket, ticket.getId());
         }
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

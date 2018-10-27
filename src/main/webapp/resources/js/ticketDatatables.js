@@ -12,11 +12,15 @@ function updateTable() {
 
 $(function () {
     datatableApi = $("#datatable").DataTable({
+        "ajax": {
+            "url": ajaxUrl,
+            "dataSrc": ""
+        },
         "paging": false,
         "info": true,
         "columns": [
             {
-                "data": "dateTime"
+                "data": "dateTime",
             },
             {
                 "data": "description"
@@ -30,7 +34,7 @@ $(function () {
                 0,
                 "desc"
             ]
-        ]
+        ],
+        "initComplete": makeEditable
     });
-    makeEditable();
 });

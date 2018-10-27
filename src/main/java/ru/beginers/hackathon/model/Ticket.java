@@ -2,6 +2,7 @@ package ru.beginers.hackathon.model;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -28,13 +29,11 @@ public class Ticket extends AbstractBaseEntity {
     @Column(name = "description")
     private String description;
 
-    @NotBlank
-    @Size(max = 100)
-    @Column(name = "date_time")
+    @Column(name = "date_time", nullable = false)
+    @NotNull
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime dateTime;
 
-    @NotBlank
-    @Size(max = 100)
     @Column(name = "state")
     private boolean state;
 
