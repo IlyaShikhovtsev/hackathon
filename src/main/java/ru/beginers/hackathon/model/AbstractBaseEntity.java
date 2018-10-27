@@ -3,11 +3,10 @@ package ru.beginers.hackathon.model;
 import org.hibernate.Hibernate;
 import org.springframework.data.domain.Persistable;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
 
+@MappedSuperclass
+@Access(AccessType.FIELD)
 public abstract class AbstractBaseEntity implements Persistable<Integer> {
     public static final int START_SEQ = 100000;
 
