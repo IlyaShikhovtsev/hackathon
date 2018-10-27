@@ -24,6 +24,15 @@ CREATE TABLE users
   FOREIGN KEY (role_id) REFERENCES user_roles (id) ON DELETE CASCADE
 );
 
+CREATE TABLE sites
+(
+  id          INTEGER PRIMARY KEY DEFAULT nextval('global_seq '),
+  domain_name VARCHAR NOT NULL,
+  user_id     INTEGER,
+  role_id     INTEGER,
+  FOREIGN KEY (user_id) REFERENCES users (id),
+  FOREIGN KEY (role_id) REFERENCES user_roles (id)
+)
 
 CREATE TABLE tickets
 (
@@ -36,13 +45,3 @@ CREATE TABLE tickets
   FOREIGN KEY (site_id) REFERENCES sites(id) ON DELETE CASCADE,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
-
-CREATE TABLE sites
-(
-  id          INTEGER PRIMARY KEY DEFAULT nextval('global_seq '),
-  domain_name VARCHAR NOT NULL,
-  user_id     INTEGER,
-  role_id     INTEGER,
-  FOREIGN KEY (user_id) REFERENCES users (id),
-  FOREIGN KEY (role_id) REFERENCES user_roles (id)
-)
