@@ -8,7 +8,7 @@ INSERT INTO users (login, name, password) VALUES
   ('User', 'Ivan', 'password'),
   ('Admin', 'Andrey', 'password');
 
-INSERT INTO user_roles (roles, user_id) VALUES
+INSERT INTO user_roles (role, user_id) VALUES
   ('ROLE_USER', 100000),
   ('ROLE_ADMIN', 100001);
 
