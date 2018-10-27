@@ -17,22 +17,25 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public Ticket get(int id, int userId) throws NotFoundException {
-        return null;
+        return  ticketRepository.get(id, userId);
     }
 
     @Override
     public void delete(int id, int userId) throws NotFoundException {
+        ticketRepository.delete(id, userId);
 
     }
 
     @Override
     public List<Ticket> getAll(int userId) {
-        return null;
+
+        return  ticketRepository.getAll(userId);
     }
 
     @Override
     public Ticket update(Ticket ticket, int userId) throws NotFoundException {
-        return null;
+    
+        return  ticketRepository.save(ticket, userId);
     }
 
     @Override
