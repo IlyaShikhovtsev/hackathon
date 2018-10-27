@@ -10,16 +10,16 @@ CREATE SEQUENCE global_seq
 CREATE TABLE user_roles
 (
   id         INTEGER PRIMARY KEY DEFAULT nextval(' global_seq '),
-  roles_name TEXT NOT NULL,
+  roles_name VARCHAR NOT NULL,
   CONSTRAINT user_roles_idx UNIQUE (roles_name)
 );
 
 CREATE TABLE users
 (
   id       INTEGER PRIMARY KEY DEFAULT nextval(' global_seq '),
-  login    TEXT    NOT NULL,
-  name     TEXT    NOT NULL,
-  password TEXT    NOT NULL,
+  login    VARCHAR    NOT NULL,
+  name     VARCHAR    NOT NULL,
+  password VARCHAR    NOT NULL,
   role_id  INTEGER NOT NULL,
   FOREIGN KEY (role_id) REFERENCES user_roles (id) ON DELETE CASCADE
 );
@@ -33,13 +33,14 @@ CREATE TABLE tickets
   description TEXT      NOT NULL,
   site_id     INTEGER   NOT NULL,
   state       BOOLEAN             DEFAULT TRUE,
-  FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+  FOREIGN KEY (site_id) REFERENCES sites(id) ON DELETE CASCADE,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE sites
 (
   id          INTEGER PRIMARY KEY DEFAULT nextval('global_seq '),
-  domain_name TEXT NOT NULL,
+  domain_name VARCHAR NOT NULL,
   user_id     INTEGER,
   role_id     INTEGER,
   FOREIGN KEY (user_id) REFERENCES users (id),
