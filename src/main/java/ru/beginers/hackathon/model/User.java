@@ -1,11 +1,9 @@
 package ru.beginers.hackathon.model;
 
-import org.springframework.util.CollectionUtils;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.*;
+import java.util.List;
 
 @Table(name = "users")
 @Entity
@@ -21,11 +19,10 @@ public class User extends AbstractNamedEntity {
     @Column(name = "password")
     private String password;
 
-    @Enumerated(EnumType.STRING)
-    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
-    @Column(name = "role")
-    @ElementCollection(fetch = FetchType.EAGER)
-    private Set<Role> roles;
+    @NotBlank
+    @Size(max = 100)
+    @Column(name = "role_id")
+    private Integer roleId;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<Ticket> tickets;
@@ -34,18 +31,14 @@ public class User extends AbstractNamedEntity {
     }
 
     public User(User u) {
-        this(u.getId(), u.getName(), u.getLogin(), u.getPassword(), u.getRoles());
+        this(u.getId(), u.getName(), u.getLogin(), u.getPassword(), u.getRoleId());
     }
 
-    public User(Integer id, String name, String login, String password, Role role, Role... roles) {
-        this(id, name, login, password, EnumSet.of(role, roles));
-    }
-
-    public User(Integer id, String name, String login, String password, Collection<Role> roles) {
+    public User(Integer id, String name, String login, String password, Integer roleId) {
         super(id, name);
         this.login = login;
         this.password = password;
-        setRoles(roles);
+        this.roleId = roleId;
     }
 
     public String getLogin() {
@@ -64,12 +57,12 @@ public class User extends AbstractNamedEntity {
         this.password = password;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public Integer getRoleId() {
+        return roleId;
     }
 
-    public void setRoles(Collection<Role> roles) {
-        this.roles = CollectionUtils.isEmpty(roles) ? Collections.emptySet() : EnumSet.copyOf(roles);;
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 
     public List<Ticket> getTickets() {

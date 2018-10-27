@@ -7,7 +7,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -18,12 +17,12 @@ public class Ticket extends AbstractBaseEntity {
     @JoinColumn(name = "user_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
-    private User user;
+    private Integer userId;
 
     @NotBlank
     @Size(max = 100)
-    @Column(name = "site")
-    private String site;
+    @Column(name = "site_id")
+    private String siteId;
 
     @NotBlank
     @Size(max = 100)
@@ -43,25 +42,25 @@ public class Ticket extends AbstractBaseEntity {
     public Ticket() {
     }
 
-    public Ticket(String site, String description) {
-        this.site = site;
+    public Ticket(String siteId, String description) {
+        this.siteId = siteId;
         this.description = description;
     }
 
-    public Ticket(User user, String site, String description, LocalDateTime dateTime, boolean status) {
-        this.user = user;
-        this.site = site;
+    public Ticket(Integer user, String siteId, String description, LocalDateTime dateTime, boolean status) {
+        this.userId = user;
+        this.siteId = siteId;
         this.description = description;
         this.dateTime = dateTime;
         this.state = status;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(Integer user) {
+        this.userId = user;
     }
 
-    public void setSite(String site) {
-        this.site = site;
+    public void setSiteId(String siteId) {
+        this.siteId = siteId;
     }
 
     public void setDescription(String description) {
@@ -76,12 +75,12 @@ public class Ticket extends AbstractBaseEntity {
         this.state = status;
     }
 
-    public User getUser() {
-        return user;
+    public Integer getUser() {
+        return userId;
     }
 
-    public String getSite() {
-        return site;
+    public String getSiteId() {
+        return siteId;
     }
 
     public String getDescription() {

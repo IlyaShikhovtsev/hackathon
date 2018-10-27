@@ -33,7 +33,7 @@
                 </td>
                 <td>${ticket.description}</td>
                 <td>${ticket.status}</td>
-                <td>${ticket.site}</td>
+                <td>${ticket.siteId}</td>
                 <td><a href="tickets/update?id=${ticket.id}"><spring:message code="common.update"/></a></td>
                 <td><a href="tickets/delete?id=${ticket.id}"><spring:message code="common.delete"/></a></td>
             </tr>
