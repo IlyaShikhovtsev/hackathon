@@ -40,7 +40,7 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public Ticket create(Ticket ticket, int userId) {
-        Assert.notNull(ticket, "meal must not be null");
+        Assert.notNull(ticket, "ticket must not be null");
         return repository.save(ticket, userId);
     }
 
