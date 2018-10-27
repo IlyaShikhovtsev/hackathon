@@ -2,8 +2,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>hackaton</groupId>
-    <artifactId>hackaton</artifactId>
+    <groupId>hackathon</groupId>
+    <artifactId>hackathon</artifactId>
     <packaging>war</packaging>
 
     <version>1.0-SNAPSHOT</version>
@@ -14,7 +14,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <tomcat.version>8.5.24</tomcat.version>
-        <spring.version>5.0.1.RELEASE</spring.version>
+        <spring.version>5.0.7.RELEASE</spring.version>
         <spring-data-jpa.version>2.0.2.RELEASE</spring-data-jpa.version>
 
         <!-- Logging -->
@@ -36,7 +36,7 @@
     </properties>
 
     <build>
-        <finalName>hackaton.prod</finalName>
+        <finalName>hackathon.prod</finalName>
         <defaultGoal>package</defaultGoal>
         <plugins>
             <plugin>
