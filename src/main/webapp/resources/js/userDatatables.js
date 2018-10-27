@@ -14,7 +14,7 @@ $(function () {
                 "data": "name"
             },
             {
-                "data": "email"
+                "data": "login"
             },
             {
                 "data": "roles"

@@ -1,16 +1,9 @@
 package ru.beginers.hackathon.model;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
-@Table(name = "user_roles")
+@Table(name = "roles")
 @Entity
-public class Role extends AbstractBaseEntity{
-
-    @NotBlank
-    @Size(max = 100)
-    @Column(name = "roles_name")
-    private String rolesName;
-
+public class Role extends AbstractNamedEntity {
 }

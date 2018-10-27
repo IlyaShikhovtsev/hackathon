@@ -19,10 +19,9 @@ public class User extends AbstractNamedEntity {
     @Column(name = "password")
     private String password;
 
-    @NotBlank
-    @Size(max = 100)
-    @Column(name = "role_id")
-    private Integer roleId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id", unique = true, nullable = false)
+    private Role role;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<Ticket> tickets;
@@ -31,14 +30,14 @@ public class User extends AbstractNamedEntity {
     }
 
     public User(User u) {
-        this(u.getId(), u.getName(), u.getLogin(), u.getPassword(), u.getRoleId());
+        this(u.getId(), u.getName(), u.getLogin(), u.getPassword(), u.getRole());
     }
 
-    public User(Integer id, String name, String login, String password, Integer roleId) {
+    public User(Integer id, String name, String login, String password, Role role) {
         super(id, name);
         this.login = login;
         this.password = password;
-        this.roleId = roleId;
+        this.role = role;
     }
 
     public String getLogin() {
@@ -57,12 +56,12 @@ public class User extends AbstractNamedEntity {
         this.password = password;
     }
 
-    public Integer getRoleId() {
-        return roleId;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public List<Ticket> getTickets() {
