@@ -1,35 +1,39 @@
 package ru.beginers.hackathon.model;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tickets")
 public class Ticket extends AbstractBaseEntity {
 
+    @Column(name = "user")
     private User user;
 
+    @Column(name = "site")
     private String site;
 
+    @Column(name = "description")
     private String description;
 
-    private LocalDate date;
+    @Column(name = "date")
+    private LocalDateTime dateTime;
 
-    private boolean status;
+    @Column(name = "state")
+    private boolean state;
 
     public Ticket() {
     }
 
-    public Ticket(User user, String site, String description, LocalDate date, boolean status) {
+    public Ticket(User user, String site, String description, LocalDateTime dateTime, boolean status) {
         this.user = user;
         this.site = site;
         this.description = description;
-        this.date = date;
-        this.status = status;
+        this.dateTime = dateTime;
+        this.state = status;
     }
 
     public void setUser(User user) {
@@ -44,12 +48,12 @@ public class Ticket extends AbstractBaseEntity {
         this.description = description;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
 
     public void setStatus(boolean status) {
-        this.status = status;
+        this.state = status;
     }
 
     public User getUser() {
@@ -64,11 +68,11 @@ public class Ticket extends AbstractBaseEntity {
         return description;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
     public boolean isStatus() {
-        return status;
+        return state;
     }
 }
