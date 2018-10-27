@@ -5,10 +5,7 @@ import org.springframework.util.CollectionUtils;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Table(name = "users")
 @Entity
@@ -36,19 +33,19 @@ public class User extends AbstractNamedEntity {
     public User() {
     }
 
-    public User(String login, String password, Set<Role> roles, List<Ticket> tickets) {
-        this.login = login;
-        this.password = password;
-        this.roles = roles;
-        this.tickets = tickets;
+    public User(User u) {
+        this(u.getId(), u.getName(), u.getLogin(), u.getPassword(), u.getRoles());
     }
 
-    public User(Integer id, String name, String login, String password, Set<Role> roles, List<Ticket> tickets) {
+    public User(Integer id, String name, String login, String password, Role role, Role... roles) {
+        this(id, name, login, password, EnumSet.of(role, roles));
+    }
+
+    public User(Integer id, String name, String login, String password, Collection<Role> roles) {
         super(id, name);
         this.login = login;
         this.password = password;
-        this.roles = roles;
-        this.tickets = tickets;
+        setRoles(roles);
     }
 
     public String getLogin() {
@@ -71,7 +68,7 @@ public class User extends AbstractNamedEntity {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(Collection<Role> roles) {
         this.roles = CollectionUtils.isEmpty(roles) ? Collections.emptySet() : EnumSet.copyOf(roles);;
     }
 

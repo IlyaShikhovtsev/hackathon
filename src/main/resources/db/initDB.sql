@@ -16,8 +16,8 @@ CREATE TABLE users
 CREATE TABLE user_roles
 (
   user_id INTEGER NOT NULL,
-  roles    VARCHAR,
-  CONSTRAINT user_roles_idx UNIQUE (user_id, roles),
+  role    VARCHAR,
+  CONSTRAINT user_roles_idx UNIQUE (user_id, role),
   FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
 
