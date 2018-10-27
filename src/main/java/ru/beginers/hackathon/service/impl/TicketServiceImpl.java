@@ -1,11 +1,19 @@
-package ru.beginers.hackathon.service;
+package ru.beginers.hackathon.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ru.beginers.hackathon.model.Ticket;
+import ru.beginers.hackathon.repository.TicketRepository;
+import ru.beginers.hackathon.service.TicketService;
 import ru.beginers.hackathon.util.exception.NotFoundException;
 
 import java.util.List;
 
+@Service
 public class TicketServiceImpl implements TicketService {
+
+    @Autowired
+    private TicketRepository ticketRepository;
 
     @Override
     public Ticket get(int id, int userId) throws NotFoundException {
