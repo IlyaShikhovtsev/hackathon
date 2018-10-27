@@ -4,6 +4,8 @@ import org.hibernate.Hibernate;
 import org.springframework.data.domain.Persistable;
 
 public abstract class AbstractBaseEntity implements Persistable<Integer> {
+    public static final int START_SEQ = 100000;
+
     protected Integer id;
 
     protected AbstractBaseEntity() {
