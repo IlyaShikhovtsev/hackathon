@@ -32,7 +32,7 @@ public class Ticket extends AbstractBaseEntity {
 
     @NotBlank
     @Size(max = 100)
-    @Column(name = "date")
+    @Column(name = "date_time")
     private LocalDateTime dateTime;
 
     @NotBlank

@@ -11,10 +11,10 @@ import java.util.List;
 public class TicketRepositoryImpl implements TicketRepository {
 
     @Autowired
-    CrudTicketRepository crudTicketRepository;
+    private CrudTicketRepository crudTicketRepository;
 
     @Autowired
-    CrudUserRepository crudUserRepository;
+    private CrudUserRepository crudUserRepository;
 
     @Override
     public Ticket save(Ticket ticket, int userId) {

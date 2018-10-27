@@ -15,10 +15,10 @@ public interface CrudTicketRepository extends JpaRepository<Ticket, Integer> {
 
     @Modifying
     @Transactional
-    @Query("DELETE FROM Meal m WHERE m.id=:id AND m.user.id=:userId")
+    @Query("DELETE FROM Ticket t WHERE t.id=:id AND t.user.id=:userId")
     int delete(@Param("id") int id, @Param("userId") int userId);
 
 
-    @Query("SELECT m FROM Meal m JOIN FETCH m.user WHERE m.id = ?1 and m.user.id = ?2")
+    @Query("SELECT t FROM Ticket t JOIN FETCH t.user WHERE t.id = ?1 and t.user.id = ?2")
     Ticket getWithUser(@Param("id") int id, @Param("userId") int userId);
 }
