@@ -1,32 +1,18 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<div class="div-header clearfix">
-    <div class="login">
-        <center>
-            <div class="authoriz">
-                <h1>Авторизация:</h1>
-                <input name="who" placeholder="Логин" type="text">
-                <input name="realwho" placeholder="Пароль" type="password">
-                <a href="tickets">
-                    <div class="div-text">
-                        <label>Войти</label>
-                    </div>
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <a href="tickets" class="navbar-brand"><spring:message code="app.title"/></a>
+
+        <div class="collapse navbar-collapse">
+            <form class="navbar-form navbar-right">
+                <a class="btn btn-info" href="users"><spring:message code="user.title"/></a>
+
+                <a class="btn btn-primary" href="">
+                    <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
                 </a>
-                <a href="/join" class="a-padd">
-                    <div class="div-text">Регистрация</div>
-                </a>
-            </div>
-        </center>
+            </form>
+        </div>
     </div>
 </div>
-
-<%--
-<header>
-    <a href="${pageContext.request.contextPath}/">
-        <spring:message code="app.home"/>
-    </a>&nbsp;|&nbsp;
-    <a href="tickets">
-    <spring:message code="app.title"/>
-    </a>
-</header>--%>
