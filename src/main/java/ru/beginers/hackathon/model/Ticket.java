@@ -3,6 +3,8 @@ package ru.beginers.hackathon.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -10,18 +12,28 @@ import java.time.LocalDateTime;
 @Table(name = "tickets")
 public class Ticket extends AbstractBaseEntity {
 
+    @NotBlank
+    @Size(max = 100)
     @Column(name = "user")
     private User user;
 
+    @NotBlank
+    @Size(max = 100)
     @Column(name = "site")
     private String site;
 
+    @NotBlank
+    @Size(max = 100)
     @Column(name = "description")
     private String description;
 
+    @NotBlank
+    @Size(max = 100)
     @Column(name = "date")
     private LocalDateTime dateTime;
 
+    @NotBlank
+    @Size(max = 100)
     @Column(name = "state")
     private boolean state;
 
