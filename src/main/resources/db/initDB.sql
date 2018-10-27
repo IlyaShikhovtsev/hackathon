@@ -29,6 +29,6 @@ CREATE TABLE tickets
   date_time TIMESTAMP  NOT NULL,
   description TEXT NOT NULL,
   site TEXT NOT NULL,
-  state BOOLEAN,
+  state BOOLEAN DEFAULT TRUE,
   FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 )
