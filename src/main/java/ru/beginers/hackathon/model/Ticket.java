@@ -17,12 +17,12 @@ public class Ticket extends AbstractBaseEntity {
     @JoinColumn(name = "user_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
-    private Integer userId;
+    private User user;
 
     @NotBlank
     @Size(max = 100)
     @Column(name = "site_id")
-    private String siteId;
+    private Integer siteId;
 
     @NotBlank
     @Size(max = 100)
@@ -42,24 +42,24 @@ public class Ticket extends AbstractBaseEntity {
     public Ticket() {
     }
 
-    public Ticket(String siteId, String description) {
+    public Ticket(Integer siteId, String description) {
         this.siteId = siteId;
         this.description = description;
     }
 
-    public Ticket(Integer user, String siteId, String description, LocalDateTime dateTime, boolean status) {
-        this.userId = user;
+    public Ticket(User user, Integer siteId, String description, LocalDateTime dateTime, boolean status) {
+        this.user = user;
         this.siteId = siteId;
         this.description = description;
         this.dateTime = dateTime;
         this.state = status;
     }
 
-    public void setUser(Integer user) {
-        this.userId = user;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public void setSiteId(String siteId) {
+    public void setSiteId(Integer siteId) {
         this.siteId = siteId;
     }
 
@@ -75,11 +75,11 @@ public class Ticket extends AbstractBaseEntity {
         this.state = status;
     }
 
-    public Integer getUser() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public String getSiteId() {
+    public Integer getSiteId() {
         return siteId;
     }
 
