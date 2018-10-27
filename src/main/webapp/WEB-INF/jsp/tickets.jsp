@@ -11,7 +11,7 @@
     <h3><spring:message code="ticket.title"/></h3>
 
     <hr>
-    <a href="meals/create"><spring:message code="ticket.add"/></a>
+    <a href="tickets/create"><spring:message code="ticket.add"/></a>
     <hr>
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
