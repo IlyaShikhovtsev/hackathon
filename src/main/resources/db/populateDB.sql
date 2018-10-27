@@ -3,12 +3,12 @@ DELETE FROM users;
 DELETE FROM tickets;
 ALTER SEQUENCE global_seq RESTART WITH 100000;
 
-INSERT INTO users (login, role, name, password) VALUES
+INSERT INTO users (login, name, password) VALUES
 
-  ('User', 'User', 'Ivan', 'password'),
-  ('Admin', 'Admin', 'Andrey', 'password');
+  ('User', 'Ivan', 'password'),
+  ('Admin', 'Andrey', 'password');
 
-INSERT INTO user_roles (role, user_id) VALUES
+INSERT INTO user_roles (roles, user_id) VALUES
   ('ROLE_USER', 100000),
   ('ROLE_ADMIN', 100001);
 
