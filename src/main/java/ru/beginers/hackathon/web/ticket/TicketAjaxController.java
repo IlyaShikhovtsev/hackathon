@@ -34,10 +34,10 @@ public class TicketAjaxController extends AbstractTicketController {
 
     @GetMapping(value = "/{siteName}")
     public @ResponseBody Ticket check(@PathVariable("siteName") String siteName) {
-        Ticket t = new Ticket();
-        t.setState(true);
-        return t;
-        /*Ticket ticket = new Ticket(description, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), new Site(siteName));
-        super.create(ticket);*/
+        Ticket ticket = super.check(siteName);
+        if (quantity(ticket)){
+            ticket.setState(true);
+        }
+        return ticket;
     }
 }

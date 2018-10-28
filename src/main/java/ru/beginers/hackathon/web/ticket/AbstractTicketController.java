@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.beginers.hackathon.AuthorizedUser;
 import ru.beginers.hackathon.model.Ticket;
+import ru.beginers.hackathon.repository.SiteRepository;
+import ru.beginers.hackathon.repository.impl.CrudUserRepository;
 import ru.beginers.hackathon.service.TicketService;
 
 import java.util.List;
@@ -17,6 +19,10 @@ public abstract class AbstractTicketController {
 
     @Autowired
     private TicketService service;
+    @Autowired
+    private CrudUserRepository userRepository;
+    @Autowired
+    private SiteRepository siteRepository;
 
     public Ticket get(int id) {
         int userId = AuthorizedUser.id();
@@ -48,5 +54,24 @@ public abstract class AbstractTicketController {
         assureIdConsistent(ticket, id);
         log.info("update {} for user {}", ticket, userId);
         service.update(ticket, userId);
+    }
+
+    public Ticket check(String siteName) {
+        Ticket t = new Ticket();
+        if (siteRepository.findByUserIdAndNameOrNameAndRoleId(AuthorizedUser.id(), siteName, siteName,
+                userRepository.findUserById(AuthorizedUser.id()).getRole().getId()) == null) {
+            t.setState(false);
+        } else {
+            t.setState(true);
+        }
+        return t;
+    }
+
+    public boolean quantity(Ticket ticket) {
+        if (siteRepository.findByIdAndRoleId(ticket.getUser().getId(),
+                ticket.getUser().getRole().getId()).size() >= 5) {
+            return true;
+        }
+        return false;
     }
 }
