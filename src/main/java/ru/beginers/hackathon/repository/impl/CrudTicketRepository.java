@@ -4,11 +4,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 import ru.beginers.hackathon.model.Ticket;
 
-import javax.transaction.Transactional;
 import java.util.List;
-
+@Transactional
 public interface CrudTicketRepository extends JpaRepository<Ticket, Integer> {
 
     List<Ticket> getAllByUserId(int userId);

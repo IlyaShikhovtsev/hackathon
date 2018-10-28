@@ -11,7 +11,7 @@ import java.util.List;
 public class UserRepositoryImpl implements UserRepository {
 
     @Autowired
-    CrudUserRepository crudUserRepository;
+    private CrudUserRepository crudUserRepository;
 
     @Override
     public User save(User user) {
@@ -32,7 +32,6 @@ public class UserRepositoryImpl implements UserRepository {
     public User getByLogin(String login) {
         return crudUserRepository.getByLogin(login);
     }
-
 
     @Override
     public List<User> getAll() {

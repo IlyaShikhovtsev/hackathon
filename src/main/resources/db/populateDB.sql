@@ -13,7 +13,7 @@ INSERT INTO users (login, name, password, role_id) VALUES
   ('Admin', 'Andrey', 'password', 100001);
 
 
-INSERT INTO sites (domain_name, user_id, role_id) VALUES
+INSERT INTO sites (name, user_id, role_id) VALUES
   ('vk.com', null, 100000),
   ('github.com', null, 100001),
   ('google.com', null, 100000),

@@ -3,11 +3,10 @@ var datatableApi;
 
 function updateTable() {
     $.ajax({
-        type: "POST",
-        url: ajaxUrl + "filter",
-        data: $("#filter").serialize(),
-        success: updateTableByData
-    });
+        type: "GET",
+        url: ajaxUrl,
+        // data: $("#filter").serialize()
+    }).done(updateTableByData);
 }
 
 $(function () {
@@ -21,12 +20,18 @@ $(function () {
         "columns": [
             {
                 "data": "dateTime",
+                "render": function (date, type, row) {
+                    if (type === 'display') {
+                        return date.replace('T', ' ').substr(0, 16);
+                    }
+                    return date;
+                }
             },
             {
                 "data": "description"
             },
             {
-                "data": "site"
+                "data": "site.name"
             }
         ],
         "order": [

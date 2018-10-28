@@ -3,12 +3,17 @@ package ru.beginers.hackathon.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import ru.beginers.hackathon.model.Site;
 import ru.beginers.hackathon.model.Ticket;
+import ru.beginers.hackathon.repository.SiteRepository;
 import ru.beginers.hackathon.repository.TicketRepository;
+import ru.beginers.hackathon.repository.UserRepository;
+import ru.beginers.hackathon.repository.impl.CrudUserRepository;
 import ru.beginers.hackathon.service.TicketService;
 import ru.beginers.hackathon.util.exception.NotFoundException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static ru.beginers.hackathon.util.ValidationUtil.checkNotFoundWithId;
 
@@ -18,9 +23,15 @@ public class TicketServiceImpl implements TicketService {
     @Autowired
     private TicketRepository repository;
 
+    @Autowired
+    private SiteRepository siteRepository;
+
+    @Autowired
+    private CrudUserRepository userRepository;
+
     @Override
     public Ticket get(int id, int userId) throws NotFoundException {
-        return  checkNotFoundWithId(repository.get(id, userId), id);
+        return checkNotFoundWithId(repository.get(id, userId), id);
     }
 
     @Override
@@ -30,7 +41,7 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public List<Ticket> getAll(int userId) {
-        return  repository.getAll(userId);
+        return repository.getAll(userId);
     }
 
     @Override
@@ -41,6 +52,13 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public Ticket create(Ticket ticket, int userId) {
         Assert.notNull(ticket, "ticket must not be null");
+
+        if (siteRepository.findByNameAndUserIdOrNameAndRoleId(
+                ticket.getSite().getName(), userId, ticket.getSite().getName(), userRepository.findUserById(userId).getRole().getId())
+                .size() != 0) {
+            ticket.setState(true);
+            return ticket;
+        }
         return repository.save(ticket, userId);
     }
 

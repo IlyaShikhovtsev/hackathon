@@ -27,7 +27,7 @@ CREATE TABLE users
 CREATE TABLE sites
 (
   id          INTEGER PRIMARY KEY DEFAULT nextval('global_seq '),
-  domain_name VARCHAR NOT NULL,
+  name VARCHAR NOT NULL,
   user_id     INTEGER,
   role_id     INTEGER,
   FOREIGN KEY (user_id) REFERENCES users (id),

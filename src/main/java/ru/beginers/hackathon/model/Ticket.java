@@ -20,8 +20,8 @@ public class Ticket extends AbstractBaseEntity {
     @NotNull
     private User user;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="site_id", unique = true, nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name="site_id")
     private Site site;
 
     @NotBlank
@@ -40,15 +40,10 @@ public class Ticket extends AbstractBaseEntity {
     public Ticket() {
     }
 
-    public Ticket(Integer siteId, String description) {
-        this.description = description;
-    }
-
-    public Ticket(User user, String description, LocalDateTime dateTime, boolean status) {
-        this.user = user;
+    public Ticket(String description, LocalDateTime dateTime, Site site) {
         this.description = description;
         this.dateTime = dateTime;
-        this.state = status;
+        this.site = site;
     }
 
     public void setUser(User user) {

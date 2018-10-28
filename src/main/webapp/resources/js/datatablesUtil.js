@@ -5,8 +5,6 @@ function makeEditable() {
     $(document).ajaxError(function (event, jqXHR, options, jsExc) {
         failNoty(jqXHR);
     });
-
-    // solve problem with cache in IE: https://stackoverflow.com/a/4303862/548473
     $.ajaxSetup({cache: false});
 }
 
@@ -39,7 +37,6 @@ function save() {
         success: function () {
             $("#editRow").modal("hide");
             updateTable();
-            successNoty("Saved");
             successNoty("common.saved");
         }
     });
@@ -66,8 +63,9 @@ function successNoty(key) {
 
 function failNoty(jqXHR) {
     closeNoty();
+    var errorInfo = JSON.parse(jqXHR.responseText);
     failedNote = new Noty({
-        text: "<span class='glyphicon glyphicon-exclamation-sign'></span> &nbsp;" + i18n["common.errorStatus"] + ": " + jqXHR.status,
+        text: "<span class='glyphicon glyphicon-exclamation-sign'></span> &nbsp;" + i18n["common.errorStatus"] + ": " + jqXHR.status + "<br>" + errorInfo.type + "<br>" + errorInfo.detail,
         type: "error",
         layout: "bottomRight"
     }).show();

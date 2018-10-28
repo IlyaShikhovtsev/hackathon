@@ -2,6 +2,7 @@ package ru.beginers.hackathon.repository.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import ru.beginers.hackathon.model.Site;
 import ru.beginers.hackathon.model.Ticket;
 import ru.beginers.hackathon.repository.TicketRepository;
 
@@ -22,6 +23,7 @@ public class TicketRepositoryImpl implements TicketRepository {
             return null;
         }
         ticket.setUser(crudUserRepository.getOne(userId));
+        ticket.setSite(new Site(ticket.getSite().getName(), userId, null));
         return crudTicketRepository.save(ticket);
     }
 

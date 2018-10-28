@@ -1,32 +1,28 @@
 package ru.beginers.hackathon.model;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Table(name = "sites")
 @Entity
-public class Site extends AbstractBaseEntity{
-    @NotBlank
-    @Size(max = 100)
-    @Column(name = "domain_name")
-    private String domainName;
+public class Site extends AbstractNamedEntity {
 
-    @NotBlank
-    @Size(max = 100)
     @Column(name = "user_id")
     private Integer userId;
 
-    @NotBlank
-    @Size(max = 100)
     @Column(name = "role_id")
     private Integer roleId;
 
     public Site() {
     }
 
-    public Site(@NotBlank @Size(max = 100) String domainName, @NotBlank @Size(max = 100) Integer userId, @NotBlank @Size(max = 100) Integer roleId) {
-        this.domainName = domainName;
+    public Site(String name) {
+        this.name = name;
+    }
+
+    public Site(String name, Integer userId, Integer roleId) {
+        this.name = name;
         this.userId = userId;
         this.roleId = roleId;
     }
@@ -37,14 +33,6 @@ public class Site extends AbstractBaseEntity{
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getDomainName() {
-        return domainName;
-    }
-
-    public void setDomainName(String domainName) {
-        this.domainName = domainName;
     }
 
     public Integer getUserId() {

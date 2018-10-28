@@ -29,7 +29,7 @@
                 <tr>
                     <td>${fn:formatDateTime(ticket.dateTime)}</td>
                     <td>${ticket.description}</td>
-                    <td>${ticket.site.domainName}</td>
+                    <td>${ticket.site.name}</td>
                 </tr>
             </c:forEach>
         </table>
@@ -56,11 +56,11 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="description" class="control-label col-xs-3"><spring:message
+                        <label for="siteName" class="control-label col-xs-3"><spring:message
                                 code="site.title"/></label>
 
                         <div class="col-xs-9">
-                            <input type="text" class="form-control" id="site" name="description"
+                            <input type="text" class="form-control" id="siteName" name="siteName"
                                    placeholder="<spring:message code="site.title"/>">
                         </div>
                     </div>
