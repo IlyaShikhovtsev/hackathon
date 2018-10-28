@@ -3,17 +3,14 @@ package ru.beginers.hackathon.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-import ru.beginers.hackathon.model.Site;
 import ru.beginers.hackathon.model.Ticket;
 import ru.beginers.hackathon.repository.SiteRepository;
 import ru.beginers.hackathon.repository.TicketRepository;
-import ru.beginers.hackathon.repository.UserRepository;
 import ru.beginers.hackathon.repository.impl.CrudUserRepository;
 import ru.beginers.hackathon.service.TicketService;
 import ru.beginers.hackathon.util.exception.NotFoundException;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static ru.beginers.hackathon.util.ValidationUtil.checkNotFoundWithId;
 
@@ -65,5 +62,9 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public Ticket getWithUser(int id, int userId) {
         return checkNotFoundWithId(repository.getWithUser(id, userId), id);
+    }
+
+    public boolean checkSite() {
+        return true;
     }
 }

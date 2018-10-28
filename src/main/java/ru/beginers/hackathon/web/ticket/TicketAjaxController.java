@@ -26,9 +26,18 @@ public class TicketAjaxController extends AbstractTicketController {
     }
 
     @PostMapping
-    public void createOrUpdate(@RequestParam("description") String description,
+    public void create(@RequestParam("description") String description,
                                @RequestParam("siteName") String siteName) {
         Ticket ticket = new Ticket(description, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), new Site(siteName));
         super.create(ticket);
+    }
+
+    @GetMapping(value = "/{siteName}")
+    public @ResponseBody Ticket check(@PathVariable("siteName") String siteName) {
+        Ticket t = new Ticket();
+        t.setState(true);
+        return t;
+        /*Ticket ticket = new Ticket(description, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), new Site(siteName));
+        super.create(ticket);*/
     }
 }

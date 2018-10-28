@@ -12,10 +12,29 @@
 <div class="jumbotron">
     <div class="container">
         <h3><spring:message code="ticket.title"/></h3>
-        <a class="btn btn-primary" onclick="add()">
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-            <spring:message code="common.add"/>
-        </a>
+        <%--<a class="btn btn-primary" onclick="check()">
+            <span class="glyphicon glyphicon-alert" aria-hidden="true"></span>
+            <spring:message code="common.check"/>
+        </a>--%>
+        <form class="form-horizontal" id="checkForm">
+            <div class="form-group">
+                <label for="siteName" class="control-label col-xs-2">
+                    <button class="btn btn-primary" type="button" onclick="check()">
+                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                    </button>
+                </label>
+
+                <div class="col-xs-9">
+                    <input type="text" class="form-control" id="checkSiteName" name="siteName"
+                           placeholder="<spring:message code="site.title"/>">
+
+                </div>
+            </div>
+        </form>
+        <%--<a class="btn btn-primary" onclick="add()">--%>
+        <%--<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>--%>
+        <%--<spring:message code="common.create"/>--%>
+        <%--</a>--%>
         <table class="table table-striped display" id="datatable">
             <thead>
             <tr>
@@ -36,7 +55,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="editRow">
+<div class="modal fade" id="addRow">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
