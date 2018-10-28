@@ -39,7 +39,7 @@ function changeUser() {
 function check() {
     $.ajax({
         type: "GET",
-        url: ajaxUrl + $('#checkSiteName').valueAsString,
+        url: ajaxUrl + $('#checkSiteName').val() + ".",
         success: function (ticket) {
             if(ticket.state == true) {
                 successNoty("common.allowed");
