@@ -115,7 +115,7 @@ function failNoty(jqXHR) {
 function renderAcceptBtn(data, type, row) {
     if (type === "display") {
         return "<a onclick='acceptRow(" + row.id + ");'>" +
-            "<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a>";
+            "<span class='glyphicon glyphicon-ok' aria-hidden='true'></span></a>";
     }
 }
 
