@@ -26,6 +26,9 @@ public class User extends AbstractNamedEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<Ticket> tickets;
 
+    @Column(name = "enabled")
+    private final boolean enabled = true;
+
     public User() {
     }
 
@@ -62,6 +65,10 @@ public class User extends AbstractNamedEntity {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
     }
 
     public List<Ticket> getTickets() {

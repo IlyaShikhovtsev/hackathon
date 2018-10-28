@@ -17,19 +17,20 @@ CREATE TABLE roles
 CREATE TABLE users
 (
   id       INTEGER PRIMARY KEY DEFAULT nextval(' global_seq '),
-  login    VARCHAR NOT NULL,
-  name     VARCHAR NOT NULL,
-  password VARCHAR NOT NULL,
-  role_id  INTEGER NOT NULL,
+  login    VARCHAR                 NOT NULL,
+  name     VARCHAR                 NOT NULL,
+  password VARCHAR                 NOT NULL,
+  enabled  BOOL DEFAULT TRUE       NOT NULL,
+  role_id  INTEGER                 NOT NULL,
   FOREIGN KEY (role_id) REFERENCES roles (id) ON DELETE CASCADE
 );
 
 CREATE TABLE sites
 (
-  id          INTEGER PRIMARY KEY DEFAULT nextval('global_seq '),
-  name VARCHAR NOT NULL,
-  user_id     INTEGER,
-  role_id     INTEGER,
+  id      INTEGER PRIMARY KEY DEFAULT nextval('global_seq '),
+  name    VARCHAR NOT NULL,
+  user_id INTEGER,
+  role_id INTEGER,
   FOREIGN KEY (user_id) REFERENCES users (id),
   FOREIGN KEY (role_id) REFERENCES roles (id)
 );
