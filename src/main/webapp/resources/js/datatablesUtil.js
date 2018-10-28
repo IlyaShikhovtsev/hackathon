@@ -9,7 +9,7 @@ function makeEditable() {
 }
 
 function add() {
-    $("#modalTitle").html(i18n["addTitle"]);
+    $("#modalTitle").html("Would you like to create a ticket?");
     form.find(":input").val("");
     $("#addRow").modal();
 }
@@ -37,7 +37,8 @@ function check() {
             if(ticket.state == true) {
                 successNoty("common.allowed");
             } else {
-                deniedNoty("common.denied")
+                deniedNoty("common.denied");
+                add();
             }
         }
     });
@@ -48,10 +49,10 @@ function save() {
         type: "POST",
         url: ajaxUrl,
         data: form.serialize(),
-        success: function (data) {
+        success: function () {
             $("#addRow").modal("hide");
             updateTable();
-            successNoty("common.saved");
+            successNoty("Ticket was created");
         }
     });
 }
