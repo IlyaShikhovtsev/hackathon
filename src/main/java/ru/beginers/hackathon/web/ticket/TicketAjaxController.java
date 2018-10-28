@@ -43,7 +43,7 @@ public class TicketAjaxController extends AbstractTicketController {
     @PostMapping(value = "/changeUser")
     public void check() {
         if(bool) {
-            AuthorizedUser.setId(100003);
+            AuthorizedUser.setId(100004);
             bool = false;
         }
         else {

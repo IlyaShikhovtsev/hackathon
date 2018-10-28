@@ -39,6 +39,9 @@ public class TicketRepositoryImpl implements TicketRepository {
 
     @Override
     public List<Ticket> getAll(int userId) {
+        if(crudUserRepository.findUserById(userId).getRole().getName().equals("Admin")) {
+            return crudTicketRepository.findAll();
+        }
         return  crudTicketRepository.getAllByUserId(userId);
     }
 
