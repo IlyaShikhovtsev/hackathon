@@ -3,6 +3,7 @@ package ru.beginers.hackathon.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import ru.beginers.hackathon.AuthorizedUser;
 import ru.beginers.hackathon.model.Ticket;
 import ru.beginers.hackathon.repository.SiteRepository;
 import ru.beginers.hackathon.repository.TicketRepository;
@@ -66,5 +67,26 @@ public class TicketServiceImpl implements TicketService {
 
     public boolean checkSite() {
         return true;
+    }
+
+    @Override
+    public Ticket check(String siteName) {
+        Ticket t = new Ticket();
+        if (siteRepository.findByUserIdAndNameOrNameAndRoleId(AuthorizedUser.id(), siteName, siteName,
+                userRepository.findUserById(AuthorizedUser.id()).getRole().getId()) == null) {
+            t.setState(false);
+        } else {
+            t.setState(true);
+        }
+        return t;
+    }
+
+    @Override
+    public boolean quantity(Ticket ticket) {
+        if (siteRepository.findByIdAndRoleId(ticket.getUser().getId(),
+                ticket.getUser().getRole().getId()).size() >= 5) {
+            return true;
+        }
+        return false;
     }
 }
