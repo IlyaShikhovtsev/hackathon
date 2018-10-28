@@ -11,6 +11,6 @@ public interface SiteRepository extends JpaRepository<Site, Integer> {
 
     List<Site> findByNameAndUserIdOrNameAndRoleId(String name, Integer userId, String name2, Integer roleId);
     Site findByUserIdAndNameOrNameAndRoleId(Integer userId, String name, String name2, Integer roleId);
-    List<Site> findByIdAndRoleId(Integer id, Integer roleId);
+    List<Site> findByUserIdAndRoleId(Integer id, Integer roleId);
 
 }

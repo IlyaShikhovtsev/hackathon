@@ -51,10 +51,7 @@ public abstract class AbstractTicketController {
     }
 
     public Ticket check(String siteName) {
-        return service.check(siteName);
-    }
-
-    public boolean quantity(Ticket ticket) {
-        return service.quantity(ticket);
+        int userId = AuthorizedUser.id();
+        return service.check(siteName, userId);
     }
 }

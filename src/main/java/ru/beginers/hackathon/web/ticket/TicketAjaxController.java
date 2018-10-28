@@ -2,6 +2,7 @@ package ru.beginers.hackathon.web.ticket;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import ru.beginers.hackathon.AuthorizedUser;
 import ru.beginers.hackathon.model.Site;
 import ru.beginers.hackathon.model.Ticket;
 
@@ -34,10 +35,21 @@ public class TicketAjaxController extends AbstractTicketController {
 
     @GetMapping(value = "/{siteName}")
     public @ResponseBody Ticket check(@PathVariable("siteName") String siteName) {
-        Ticket ticket = super.check(siteName);
-        if (quantity(ticket)){
-            ticket.setState(true);
+        return super.check(siteName);
+    }
+
+
+    private static boolean bool = true;
+    @PostMapping(value = "/changeUser")
+    public void check() {
+        if(bool) {
+            AuthorizedUser.setId(100003);
+            bool = false;
         }
-        return ticket;
+        else {
+            AuthorizedUser.setId(100002);
+            bool = true;
+
+        }
     }
 }

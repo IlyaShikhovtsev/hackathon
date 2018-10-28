@@ -8,7 +8,6 @@ INSERT INTO roles (name) VALUES
   ('User');
 
 INSERT INTO users (login, name, password, role_id) VALUES
-
   ('User', 'Ivan', 'password', 100000),
   ('Admin', 'Andrey', 'password', 100001);
 
@@ -25,5 +24,10 @@ INSERT INTO tickets (user_id, date_time, description, site_id) VALUES
   (100002, '2015-05-30 10:00:00', 'Example', 100004),
   (100002, '2015-05-30 15:00:00', 'Test', 100005),
   (100002, '2015-05-31 15:00:00', 'Test', 100006),
-  (100002, '2015-06-30 18:00:00', 'Test', 100006);
+  (100002, '2015-06-30 18:00:00', 'Test', 100006),
+  (100003, '2015-05-30 10:00:00', 'Admin', 100004),
+  (100003, '2015-05-30 15:00:00', 'Admin', 100005),
+  (100003, '2015-05-31 15:00:00', 'Admin', 100006),
+  (100003, '2015-06-30 18:00:00', 'Admin', 100006);
+
 

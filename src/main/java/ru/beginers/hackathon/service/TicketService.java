@@ -18,7 +18,5 @@ public interface TicketService {
 
     Ticket getWithUser(int id, int userId);
 
-    public boolean quantity(Ticket ticket);
-
-    public Ticket check(String siteName);
+    public Ticket check(String siteName, int userId);
 }

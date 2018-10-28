@@ -29,10 +29,17 @@ function updateTableByData(data) {
     datatableApi.clear().rows.add(data).draw();
 }
 
+function changeUser() {
+    $.ajax({
+        type: "POST",
+        url: ajaxUrl + "changeUser",
+    });
+}
+
 function check() {
     $.ajax({
         type: "GET",
-        url: ajaxUrl + $('#checkSiteName').val(),
+        url: ajaxUrl + $('#checkSiteName').valueAsString,
         success: function (ticket) {
             if(ticket.state == true) {
                 successNoty("common.allowed");

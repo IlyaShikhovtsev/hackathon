@@ -65,28 +65,19 @@ public class TicketServiceImpl implements TicketService {
         return checkNotFoundWithId(repository.getWithUser(id, userId), id);
     }
 
-    public boolean checkSite() {
-        return true;
-    }
-
     @Override
-    public Ticket check(String siteName) {
+    public Ticket check(String siteName, int userId) {
         Ticket t = new Ticket();
         if (siteRepository.findByUserIdAndNameOrNameAndRoleId(AuthorizedUser.id(), siteName, siteName,
-                userRepository.findUserById(AuthorizedUser.id()).getRole().getId()) == null) {
-            t.setState(false);
-        } else {
+                userRepository.findUserById(AuthorizedUser.id()).getRole().getId()) != null) {
             t.setState(true);
+        } else if (siteRepository.findByUserIdAndRoleId(userId,
+                userRepository.findUserById(userId).getRole().getId()).size() >= 5) {
+            t.setState(true);
+        } else {
+            t.setState(false);
         }
-        return t;
-    }
 
-    @Override
-    public boolean quantity(Ticket ticket) {
-        if (siteRepository.findByIdAndRoleId(ticket.getUser().getId(),
-                ticket.getUser().getRole().getId()).size() >= 5) {
-            return true;
-        }
-        return false;
+        return t;
     }
 }

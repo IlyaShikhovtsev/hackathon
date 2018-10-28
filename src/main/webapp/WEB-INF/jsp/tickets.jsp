@@ -12,6 +12,12 @@
 <div class="jumbotron">
     <div class="container">
         <h3><spring:message code="ticket.title"/></h3>
+
+        <button class="btn btn-primary" type="button" onclick="changeUser()">
+            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+        </button>
+
+
         <%--<a class="btn btn-primary" onclick="check()">
             <span class="glyphicon glyphicon-alert" aria-hidden="true"></span>
             <spring:message code="common.check"/>
