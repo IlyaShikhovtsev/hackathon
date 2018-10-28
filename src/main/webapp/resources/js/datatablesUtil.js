@@ -14,14 +14,23 @@ function add() {
     $("#addRow").modal();
 }
 
+function acceptRow(id) {
+    $.ajax({
+        url: ajaxUrl + "accept/" + id,
+        type: "GET"
+    }).done(function () {
+        updateTable();
+        successNoty("Accepted");
+    });
+}
+
 function deleteRow(id) {
     $.ajax({
         url: ajaxUrl + id,
-        type: "DELETE",
-        success: function () {
-            updateTable();
-            successNoty("Deleted");
-        }
+        type: "DELETE"
+    }).done(function () {
+        updateTable();
+        successNoty("Deleted");
     });
 }
 
@@ -101,4 +110,18 @@ function failNoty(jqXHR) {
         type: "error",
         layout: "bottomRight"
     }).show();
+}
+
+function renderAcceptBtn(data, type, row) {
+    if (type === "display") {
+        return "<a onclick='acceptRow(" + row.id + ");'>" +
+            "<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a>";
+    }
+}
+
+function renderDeleteBtn(data, type, row) {
+    if (type === "display") {
+        return "<a onclick='deleteRow(" + row.id + ");'>" +
+            "<span class='glyphicon glyphicon-remove' aria-hidden='true'></span></a>";
+    }
 }

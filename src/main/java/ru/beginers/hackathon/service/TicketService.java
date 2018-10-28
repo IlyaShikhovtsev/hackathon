@@ -19,4 +19,6 @@ public interface TicketService {
     Ticket getWithUser(int id, int userId);
 
     public Ticket check(String siteName, int userId);
+
+    public void acceptTicket(int id, int userId);
 }

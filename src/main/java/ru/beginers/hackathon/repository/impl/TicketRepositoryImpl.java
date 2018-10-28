@@ -22,13 +22,17 @@ public class TicketRepositoryImpl implements TicketRepository {
         if (!ticket.isNew() && get(ticket.getId(), userId) == null) {
             return null;
         }
-        ticket.setUser(crudUserRepository.getOne(userId));
-        ticket.setSite(new Site(ticket.getSite().getName(), userId, null));
+        ticket.setUser(crudUserRepository.findUserById(userId));
+//        ticket.setSite(new Site(ticket.getSite().getName(), userId, null));
+        ticket.setDescription(String.format("Role %s; Login %s; description: %s", ticket.getUser().getRole().getName(), ticket.getUser().getLogin(), ticket.getDescription()));
         return crudTicketRepository.save(ticket);
     }
 
     @Override
     public boolean delete(int id, int userId) {
+        if(crudUserRepository.findUserById(userId).getRole().getName().equals("Admin")) {
+            return crudTicketRepository.deleteById(id) != 0;
+        }
         return crudTicketRepository.delete(id, userId) != 0 ;
     }
 

@@ -32,6 +32,16 @@ $(function () {
             },
             {
                 "data": "site.name"
+            },
+            {
+                "render": renderAcceptBtn,
+                "defaultContent": "",
+                "orderable": false
+            },
+            {
+                "render": renderDeleteBtn,
+                "defaultContent": "",
+                "orderable": false
             }
         ],
         "order": [

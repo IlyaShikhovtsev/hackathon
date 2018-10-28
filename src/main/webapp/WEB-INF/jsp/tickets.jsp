@@ -12,12 +12,6 @@
 <div class="jumbotron">
     <div class="container">
         <h3><spring:message code="ticket.title"/></h3>
-
-        <button class="btn btn-primary" type="button" onclick="changeUser()">
-            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-        </button>
-
-
         <%--<a class="btn btn-primary" onclick="check()">
             <span class="glyphicon glyphicon-alert" aria-hidden="true"></span>
             <spring:message code="common.check"/>
@@ -43,14 +37,20 @@
                 <th><spring:message code="ticket.dateTime"/></th>
                 <th><spring:message code="ticket.description"/></th>
                 <th><spring:message code="site.title"/></th>
+                <th></th>
+                <th></th>
             </tr>
             </thead>
             <c:forEach items="${tickets}" var="ticket">
                 <jsp:useBean id="ticket" scope="page" type="ru.beginers.hackathon.model.Ticket"/>
-                <tr>
+                <tr class="${ticket.state ? 'allowed' : 'notAllowed'}">
                     <td>${fn:formatDateTime(ticket.dateTime)}</td>
                     <td>${ticket.description}</td>
                     <td>${ticket.site.name}</td>
+                <td><a onclick="acceptRow(${ticket.id})"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></a></td>
+                <td><a onclick="deleteRow(${ticket.id})">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </a></td>
                 </tr>
             </c:forEach>
         </table>

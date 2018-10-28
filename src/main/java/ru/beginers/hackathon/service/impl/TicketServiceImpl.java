@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.beginers.hackathon.AuthorizedUser;
+import ru.beginers.hackathon.model.Site;
 import ru.beginers.hackathon.model.Ticket;
 import ru.beginers.hackathon.repository.SiteRepository;
 import ru.beginers.hackathon.repository.TicketRepository;
+import ru.beginers.hackathon.repository.impl.CrudTicketRepository;
 import ru.beginers.hackathon.repository.impl.CrudUserRepository;
 import ru.beginers.hackathon.service.TicketService;
 import ru.beginers.hackathon.util.exception.NotFoundException;
@@ -26,6 +28,8 @@ public class TicketServiceImpl implements TicketService {
 
     @Autowired
     private CrudUserRepository userRepository;
+    @Autowired
+    private CrudTicketRepository ticketRepository;
 
     @Override
     public Ticket get(int id, int userId) throws NotFoundException {
@@ -69,7 +73,7 @@ public class TicketServiceImpl implements TicketService {
     public Ticket check(String siteName, int userId) {
         Ticket t = new Ticket();
         if (siteRepository.findByUserIdAndNameOrNameAndRoleId(AuthorizedUser.id(), siteName, siteName,
-                userRepository.findUserById(AuthorizedUser.id()).getRole().getId()) != null) {
+                userRepository.findUserById(AuthorizedUser.id()).getRole().getId()).size() != 0) {
             t.setState(true);
         } else if (siteRepository.findByUserIdAndRoleId(userId,
                 userRepository.findUserById(userId).getRole().getId()).size() >= 5) {
@@ -79,5 +83,11 @@ public class TicketServiceImpl implements TicketService {
         }
 
         return t;
+    }
+
+    public void acceptTicket(int id, int userId) {
+        siteRepository.save(new Site(ticketRepository.findById(id).get().getSite().getName(), userId,
+                userRepository.findUserById(userId).getRole().getId()));
+        ticketRepository.deleteById(id);
     }
 }

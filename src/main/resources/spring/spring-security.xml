@@ -18,6 +18,7 @@
 
     <http>
         <intercept-url pattern="/login" access="isAnonymous()"/>
+        <intercept-url pattern="/ajax/profile/ticket/userId/**" access="isAnonymous()"/>
 
         <intercept-url pattern="/**/admin/**" access="hasRole('Admin')"/>
         <intercept-url pattern="/**" access="isAuthenticated()"/>
@@ -37,8 +38,9 @@
                                authorities-by-username-query="
                                                        SELECT u.login, r.name FROM users u, roles r WHERE u.role_id = r.id AND u.login = ?"/>-->
             <user-service>
-                <user name="user@yandex.ru" password="password" authorities="User"/>
-                <user name="admin@gmail.com" password="admin" authorities="Admin"/>
+                <user name="User1" password="password" authorities="User"/>
+                <user name="Admin" password="admin" authorities="Admin"/>
+                <user name="User2" password="password" authorities="User"/>
             </user-service>
         </authentication-provider>
     </authentication-manager>

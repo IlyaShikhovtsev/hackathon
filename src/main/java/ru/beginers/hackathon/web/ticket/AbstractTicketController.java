@@ -54,4 +54,9 @@ public abstract class AbstractTicketController {
         int userId = AuthorizedUser.id();
         return service.check(siteName, userId);
     }
+
+    public void acceptTicket(int id) {
+        int userId = AuthorizedUser.id();
+        service.acceptTicket(id, userId);
+    }
 }

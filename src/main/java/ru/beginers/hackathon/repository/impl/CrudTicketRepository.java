@@ -8,10 +8,15 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.beginers.hackathon.model.Ticket;
 
 import java.util.List;
-@Transactional
+@Transactional(readOnly = true)
 public interface CrudTicketRepository extends JpaRepository<Ticket, Integer> {
 
     List<Ticket> getAllByUserId(int userId);
+
+    @Modifying
+    @Transactional
+    @Query("DELETE  FROM Ticket t WHERE t.id=:id")
+    int deleteById(@Param("id") int id);
 
     @Modifying
     @Transactional

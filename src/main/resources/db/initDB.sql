@@ -22,7 +22,7 @@ CREATE TABLE users
   password VARCHAR                 NOT NULL,
   enabled  BOOL DEFAULT TRUE       NOT NULL,
   role_id  INTEGER                 NOT NULL,
-  FOREIGN KEY (role_id) REFERENCES roles (id) ON DELETE CASCADE
+  FOREIGN KEY (role_id) REFERENCES roles (id)
 );
 
 CREATE TABLE sites
@@ -43,6 +43,6 @@ CREATE TABLE tickets
   description TEXT      NOT NULL,
   site_id     INTEGER   NOT NULL,
   state       BOOLEAN             DEFAULT TRUE,
-  FOREIGN KEY (site_id) REFERENCES sites (id) ON DELETE CASCADE,
-  FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+  FOREIGN KEY (site_id) REFERENCES sites (id),
+  FOREIGN KEY (user_id) REFERENCES users (id)
 );

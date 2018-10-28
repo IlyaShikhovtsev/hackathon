@@ -26,6 +26,12 @@ public class TicketAjaxController extends AbstractTicketController {
         super.delete(id);
     }
 
+    @Override
+    @GetMapping(value = "/accept/{id}")
+    public void acceptTicket(@PathVariable("id") int id) {
+        super.acceptTicket(id);
+    }
+
     @PostMapping
     public void create(@RequestParam("description") String description,
                                @RequestParam("siteName") String siteName) {
@@ -38,6 +44,10 @@ public class TicketAjaxController extends AbstractTicketController {
         return super.check(siteName);
     }
 
+    @GetMapping(value = "/userId/{login}")
+    public void setId(@PathVariable("login") String login) {
+        AuthorizedUser.setId(login.equals("Admin") ? 100004 : login.equals("User1") ? 100002 : 100003);
+    }
 
     private static boolean bool = true;
     @PostMapping(value = "/changeUser")

@@ -1,8 +1,8 @@
-.normal {
+.allowed {
     color: green;
 }
 
-.exceeded {
+.notAllowed {
     color: red;
 }
 
